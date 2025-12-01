@@ -254,6 +254,7 @@
         }
 
         /* Responsive cho mobile */
+        /* Responsive cho mobile */
         @media (max-width: 768px) {
             section {
                 padding: 40px 0;
@@ -278,13 +279,22 @@
                 background-position: calc(30% - 1cm) center;
             }
 
-            #thank-you p {
-                font-size: 1rem;
-                /* Smaller font */
+            #thank-you h2 {
+                font-size: 1.5rem;
+                /* Giảm size chữ cho h2 nếu cần */
+            }
+
+            #thank-you .thank-text {
+                font-size: 1.2rem;
+                /* Size ban đầu, JS sẽ shrink nếu cần */
                 line-height: 1.1;
-                /* Even closer lines */
                 margin: 2px 0;
-                /* Minimal spacing */
+                white-space: nowrap;
+                /* Không xuống dòng */
+                overflow: hidden;
+                /* Ẩn phần tràn nếu vẫn còn */
+                text-overflow: ellipsis;
+                /* Thêm ... nếu tràn */
             }
 
             .title {
@@ -504,7 +514,7 @@
                 <img src="images/anh_5.jpg" alt="Ảnh tiệc nhà trai" loading="lazy" width="800" height="600">
                 <!-- Add dimensions -->
                 <h3>Tiệc Nhà Trai</h3>
-                <p>Tại: Xóm Cầu Cả, thôn Kim Giao, xã Tiến Thắng, thành phố Hà Nội</p>
+                <p>Tại: Khu 4, thôn Kim Giao, xã Tiến Thắng, thành phố Hà Nội</p>
                 <p>Vào lúc: 16:00</p>
                 <p>Chủ Nhật, Ngày 15/12/2025</p>
                 <p>Tức ngày 25 tháng 10 năm Ất Tỵ (Âm Lịch)</p>
@@ -603,10 +613,10 @@
     <!-- Thank you -->
     <section id="thank-you">
         <h2>Thank you!</h2>
-        <p>Cảm ơn bạn đã dành tình cảm cho chúng mình!</p>
-        <p>Sự hiện diện của bạn chính là món quà ý nghĩa nhất</p>
-        <p>và chúng mình vô cùng chân quý khi được cùng bạn</p>
-        <p>chia sẻ niềm hạnh phúc trong ngày trọng đại này.</p>
+        <p class="thank-text">Cảm ơn bạn đã dành tình cảm cho chúng mình!</p>
+        <p class="thank-text">Sự hiện diện của bạn chính là món quà ý nghĩa nhất</p>
+        <p class="thank-text">và chúng mình vô cùng chân quý khi được cùng bạn</p>
+        <p class="thank-text">chia sẻ niềm hạnh phúc trong ngày trọng đại này.</p>
     </section>
 
     <!-- Modal QR -->
@@ -705,6 +715,18 @@
                     clickable: true,
                 },
             });
+        });
+        document.addEventListener('DOMContentLoaded', () => {
+            if (window.innerWidth <= 768) { // Chỉ chạy trên mobile
+                const paragraphs = document.querySelectorAll('#thank-you .thank-text');
+                paragraphs.forEach(p => {
+                    let fontSize = parseFloat(window.getComputedStyle(p).fontSize); // Lấy size hiện tại
+                    while (p.scrollWidth > p.clientWidth && fontSize > 6) { // Giảm đến min 6px
+                        fontSize -= 0.5; // Giảm dần 0.5px
+                        p.style.fontSize = `${fontSize}px`;
+                    }
+                });
+            }
         });
     </script>
 </body>
