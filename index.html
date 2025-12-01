@@ -5,6 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mạnh Tiến & Trần Hoa</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@12/swiper-bundle.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
     <style>
         * {
             margin: 0;
@@ -29,109 +31,10 @@
             z-index: 2;
         }
 
-        /* Ảnh polaroid */
-        .gallery {
-            display: grid;
-            grid-template-columns: 1fr 2.0fr 1fr;
-            gap: 20px;
-            margin: 60px 0;
-            align-items: center;
-        }
-
-        .photo {
-            background: white;
-            padding: 15px;
-            border-radius: 8px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
-            transform: rotate(-3deg);
-            position: relative;
-            overflow: hidden;
-            transition: filter 0.3s ease, transform 0.3s ease;
-        }
-
-        .photo img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            display: block;
-            border-radius: 5px;
-        }
-
-        .photo:nth-child(1) {
-            transform: rotate(-8deg);
-            filter: blur(5px);
-            /* Làm mờ ảnh bên trái */
-            transform: scale(1.3);
-            /* To hơn 1.3 lần */
-        }
-
-        .photo:nth-child(1):hover {
-            filter: blur(0);
-            /* Hiện rõ khi hover */
-        }
-
-        .photo:nth-child(2) {
-            transform: rotate(2deg);
-            height: 650px;
-            /* Tăng height gốc 500px lên 1.3 lần = 650px */
-        }
-
-        .photo:nth-child(2):hover {
-            animation: shake 0.5s infinite;
-            /* Hiệu ứng lắc khi hover */
-        }
-
-        .photo:nth-child(3) {
-            transform: rotate(6deg);
-            filter: blur(5px);
-            /* Làm mờ ảnh bên phải */
-            transform: scale(1.3);
-            /* To hơn 1.3 lần */
-        }
-
-        .photo:nth-child(3):hover {
-            filter: blur(0);
-            /* Hiện rõ khi hover */
-        }
-
-        /* Hiệu ứng lắc cho ảnh giữa */
-        @keyframes shake {
-            0% {
-                transform: rotate(2deg);
-            }
-
-            50% {
-                transform: rotate(-2deg);
-            }
-
-            100% {
-                transform: rotate(2deg);
-            }
-        }
-
-        /* Trái tim nhỏ trên ảnh */
-        .heart {
-            position: absolute;
-            font-size: 20px;
-            animation: float 4s infinite ease-in-out;
-        }
-
-        @keyframes float {
-
-            0%,
-            100% {
-                transform: translateY(0);
-            }
-
-            50% {
-                transform: translateY(-15px);
-            }
-        }
-
         /* Tên cô dâu chú rể */
         .title {
             text-align: center;
-            margin: 50px 0;
+            margin: 20px 0;
             font-size: 4.5rem;
             color: #d81b60;
             font-weight: 700;
@@ -140,83 +43,21 @@
         /* We're Getting Married */
         .banner {
             text-align: center;
-            margin: 40px 0;
+            margin: 20px 0;
         }
 
         .banner span {
             display: inline-block;
-            background: white;
-            padding: 15px 40px;
-            border: 3px solid #d81b60;
+            background: transparent;
+            /* Bỏ background trắng */
+            padding: 10px 30px;
+            border: none;
+            /* Bỏ viền hồng */
             border-radius: 50px;
             font-size: 1.8rem;
             color: #d81b60;
-            box-shadow: 0 8px 20px rgba(216, 27, 96, 0.2);
-        }
-
-        /* Nút menu */
-        .menu-btn {
-            position: fixed;
-            right: 20px;
-            bottom: 20px;
-            background: #d81b60;
-            color: white;
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 24px;
-            box-shadow: 0 5px 15px rgba(216, 27, 96, 0.4);
-            z-index: 100;
-            cursor: pointer;
-        }
-
-        /* TRÁI TIM RƠI BẰNG SVG */
-        .heart-fall {
-            position: fixed;
-            top: -60px;
-            pointer-events: none;
-            z-index: 1;
-            animation: heartFall linear forwards;
-            filter: drop-shadow(0 4px 8px rgba(216, 27, 96, 0.3));
-            user-select: none;
-        }
-
-        @keyframes heartFall {
-            0% {
-                transform: translateY(-100px) translateX(0) rotate(0deg) scale(1);
-                opacity: 0;
-            }
-
-            10% {
-                opacity: 1;
-            }
-
-            90% {
-                opacity: 1;
-            }
-
-            100% {
-                transform: translateY(calc(100vh + 100px)) translateX(80px) rotate(360deg) scale(0.7);
-                opacity: 0;
-            }
-        }
-
-        .heart-fall.style1 {
-            transform: scale(0.9);
-            color: #ff69b4;
-        }
-
-        .heart-fall.style2 {
-            transform: scale(1.2);
-            color: #ff1493;
-        }
-
-        .heart-fall.style3 {
-            transform: scale(1);
-            color: #d81b60;
+            box-shadow: none;
+            /* Bỏ shadow để đơn giản */
         }
 
         /* Sections chung */
@@ -358,75 +199,111 @@
             transform: scale(1.05);
         }
 
-        /* Album ảnh - Bố cục collage */
+        /* Album ảnh mới với Swiper Coverflow */
         #album {
-            background: #f9f9f9;
+            background: transparent;
+            /* Bỏ nền trắng */
+            padding: 20px 0;
         }
 
-        .album-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            grid-template-rows: masonry;
-            gap: 10px;
-            max-width: 800px;
+        .album-title {
+            font-size: 2.5rem;
+            color: #d81b60;
+            margin-bottom: 20px;
+            font-family: 'Dancing Script', cursive;
+            /* Font đơn giản, in hoa */
+            font-weight: bold;
+        }
+
+        .album-slide {
+            width: calc(100% - 2cm);
+            /* Rộng gần full màn hình, cách lề 1cm mỗi bên */
             margin: 0 auto;
+            /* Căn giữa */
+            padding-top: 20px;
+            padding-bottom: 20px;
         }
 
-        .album-grid img {
-            width: 100%;
+        .swiper-slide {
+            background: transparent;
+            display: flex;
+            justify-content: center;
+            align-items: center;
             border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+            width: 400px;
+            /* Tăng kích thước ảnh to hơn */
+            height: 400px;
+            /* Tăng chiều cao */
+        }
+
+        .swiper-slide img {
+            display: block;
+            width: 100%;
+            height: 100%;
             object-fit: cover;
+            border-radius: 10px;
         }
 
-        .album-grid img:nth-child(1) {
-            grid-column: span 1;
-            grid-row: span 2;
+        .swiper-pagination {
+            bottom: 20px;
         }
 
-        .album-grid img:nth-child(2) {
-            grid-column: span 2;
+        .swiper-pagination-bullet {
+            background: rgba(0, 0, 0, 0.5);
         }
 
-        .album-grid img:nth-child(3) {
-            grid-column: span 1;
+        .swiper-pagination-bullet-active {
+            background: #d81b60;
+            /* Màu hồng phù hợp theme */
         }
 
-        .album-grid img:nth-child(4) {
-            grid-column: span 2;
-            grid-row: span 1;
+        /* Responsive cho mobile - Co lại theo kích thước điện thoại */
+        @media (max-width: 768px) {
+            .swiper-slide {
+                width: calc(100vw - 4cm);
+                /* Co lại, cách lề 2cm mỗi bên để phù hợp mobile */
+                height: calc(100vw - 4cm);
+                /* Làm hình vuông */
+            }
+
+            .swiper-slide img {
+                height: 100%;
+                /* Đảm bảo ảnh không bị méo */
+                image-rendering: auto; /* Để ảnh nét hơn, tránh mờ do nén */
+            }
+
+            .album-slide {
+                width: 100%;
+                /* Full width trên mobile */
+            }
+
+            #thank-you {
+                background-position: calc(50% - 1cm) center;
+                /* Dịch background sang trái 1cm trên mobile */
+            }
         }
 
-        .album-grid img:nth-child(5) {
-            grid-column: span 1;
-        }
-
-        .album-grid img:nth-child(6) {
-            grid-column: span 1;
-        }
-
-        .album-grid img:nth-child(7) {
-            grid-column: span 2;
-        }
-
-        .album-grid img:nth-child(8) {
-            grid-column: span 1;
-        }
-
-        .album-grid img:nth-child(9) {
-            grid-column: span 1;
-        }
-
-        .album-grid img:nth-child(10) {
-            grid-column: span 2;
-        }
-
-        /* Thank you */
+        /* Thank you - Background hình ảnh full màn hình */
         #thank-you {
-            background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://via.placeholder.com/1000x600?text=Anh+Thank+You') center/cover no-repeat;
+            background: url('images/LKI_1801.jpg') center/cover no-repeat;
+            /* Giữ ảnh */
+            background-size: cover;
+            /* Full màn hình */
+            width: 100vw;
+            /* Full chiều rộng */
+            margin-left: calc(50% - 50vw);
+            /* Căn giữa full width */
             color: white;
             padding: 100px 0;
             text-align: center;
+            position: relative;
+            height: 60vh;
+            /* Chỉnh chiều cao ở đây! Ví dụ: 500px, 80vh, hoặc auto để động */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            /* Căn giữa nội dung theo chiều dọc */
         }
 
         #thank-you h2 {
@@ -452,6 +329,13 @@
             background-color: rgba(0, 0, 0, 0.7);
             justify-content: center;
             align-items: center;
+            transition: opacity 0.3s ease;
+            /* Animation mượt khi mở */
+        }
+
+        .modal.show {
+            display: flex;
+            opacity: 1;
         }
 
         .modal-content {
@@ -460,6 +344,20 @@
             border-radius: 10px;
             text-align: center;
             max-width: 600px;
+            animation: fadeIn 0.3s ease;
+            /* Animation cho modal content */
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: scale(0.9);
+            }
+
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
         }
 
         .qr-container {
@@ -488,35 +386,108 @@
 
         /* Responsive */
         @media (max-width: 768px) {
-            .gallery {
-                grid-template-columns: 1fr;
-                gap: 30px;
-            }
-
-            .photo:nth-child(2) {
-                height: 400px;
-            }
-
             .title {
-                font-size: 3rem;
+                font-size: 2.5rem;
+                /* Thu nhỏ chữ trên mobile */
+                margin: 10px 0;
             }
 
             .banner span {
-                font-size: 1.4rem;
-                padding: 12px 30px;
+                font-size: 1.2rem;
+                /* Thu nhỏ chữ trên mobile */
+                padding: 8px 20px;
             }
 
             .countdown-timer {
                 flex-wrap: wrap;
             }
 
-            .album-grid {
-                grid-template-columns: 1fr 1fr;
-            }
-
             .qr-container {
                 flex-direction: column;
             }
+
+            /* Điều chỉnh vị trí chữ xuống dưới hơn trên mobile */
+            .hero-content {
+                top: 85%;
+                /* Dịch xuống thêm trên mobile */
+            }
+
+            /* Làm ảnh ngắn hơn trên mobile */
+            #hero {
+                height: 40vh;
+            }
+        }
+
+        /* CSS mới cho hero section: Ảnh được cắt phần trên, chữ dịch xuống */
+        #hero {
+            position: relative;
+            overflow: hidden;
+            padding: 0;
+            /* Loại bỏ padding để full lề */
+            margin: 0;
+            /* Full lề */
+            height: 100vh;
+            /* Chiều cao cố định để làm ảnh ngắn lại */
+        }
+
+        .hero-image {
+            width: 100vw;
+            /* Full width màn hình */
+            height: 100%;
+            /* Lấp đầy container */
+            object-fit: cover;
+            /* Cover để cắt phần thừa */
+            object-position: 50% 50%;
+            /* Zoom về trung tâm ảnh (hướng mắt nhìn vào) */
+            animation: zoomLoop 10s infinite ease-in-out;
+            /* Chậm hơn (10s thay vì 5s), bỏ alternate để zoom lên rồi lặp lại mà không zoom xuống */
+            display: block;
+        }
+
+        @keyframes zoomLoop {
+            0% {
+                transform: scale(1);
+            }
+
+            100% {
+                transform: scale(1.1);
+                /* Zoom lên cao nhất rồi lặp lại từ đầu */
+            }
+        }
+
+        .hero-content {
+            position: absolute;
+            top: 85%;
+            /* Dịch chữ xuống dưới thêm (70% + 5% tương đương 5cm tùy màn hình) */
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            z-index: 2;
+            width: 100%;
+        }
+
+        /* Music icon style */
+        .music-icon {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 50px;
+            height: 50px;
+            background: black;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 24px;
+            cursor: pointer;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            border: 2px solid #ffa500; /* Add jagged border like in the image */
+        }
+
+        .music-icon.muted {
+            color: #ffa500; /* Orange for muted 'x' */
         }
     </style>
     <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
@@ -524,26 +495,23 @@
 
 <body>
 
+    <!-- Music player -->
+    <audio id="bgMusic" loop>
+        <source src="mp3/beautiful-in-white.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+
+    <!-- Music toggle icon -->
+    <div id="music-toggle" class="music-icon">
+        <i class="fas fa-volume-up"></i>
+    </div>
+
+    <!-- Phần hero mới: Ảnh được cắt phần trên, chữ dịch xuống, bỏ trái tim -->
     <section id="hero">
-        <div class="container">
-            <div class="gallery">
-                <div class="photo">
-                    <img src="images/LKI_1801.jpg" alt="Ảnh cưới 1" loading="lazy">
-                    <div class="heart" style="top:70%; left:20%;">❤️</div>
-                </div>
-                <div class="photo">
-                    <img src="images/LKI_2032.jpg" alt="Ảnh cưới chính" loading="lazy">
-                    <div class="heart" style="top:40%; left:50%;">❤️</div>
-                    <div class="heart" style="bottom:10%; right:15%;">❤️</div>
-                </div>
-                <div class="photo">
-                    <img src="images/LKI_1825.jpg" alt="Ảnh cưới 3" loading="lazy">
-                    <div class="heart" style="top:60%; right:25%;">❤️</div>
-                </div>
-            </div>
-
+        <img class="hero-image" src="images/LKI_2032.jpg" alt="Ảnh cưới chính" loading="lazy">
+        <!-- Nội dung chồng lên ảnh -->
+        <div class="hero-content">
             <h1 class="title">Mạnh Tiến & Trần Hoa</h1>
-
             <div class="banner">
                 <span>❤️ We’re Getting Married ❤️</span>
             </div>
@@ -555,11 +523,11 @@
         <div class="container">
             <h2>Sự Kiện Cưới</h2>
             <div class="event">
-                <img src="images/anh_4.jpg" alt="Ảnh tiệc nhà gái" loading="lazy">
-                <h3>Tiệc Nhà Gái</h3>
-                <p>Tại: Xóm Đình, thôn Phú Mỹ, xã Tiến Thắng, thành phố Hà Nội</p>
+                <img src="images/anh_5.jpg" alt="Ảnh tiệc nhà trai" loading="lazy">
+                <h3>Tiệc Nhà Trai</h3>
+                <p>Tại: Xóm Cầu Cả, thôn Kim Giao, xã Tiến Thắng, thành phố Hà Nội</p>
                 <p>Vào lúc: 16:00</p>
-                <p>Chủ Nhật, Ngày 14/12/2025</p>
+                <p>Chủ Nhật, Ngày 15/12/2025</p> <!-- Sửa ngày từ 14 sang 15 -->
                 <p>Tức ngày 25 tháng 10 năm Ất Tỵ (Âm Lịch)</p>
                 <div class="icons">
                     <a href="tel:0358140898">☎️</a>
@@ -567,15 +535,15 @@
                 </div>
             </div>
             <div class="event">
-                <img src="images/anh_5.jpg" alt="Ảnh tiệc nhà trai" loading="lazy">
-                <h3>Tiệc Nhà Trai</h3>
-                <p>Tại: Xóm Cầu Cả, thôn Kim Giao, xã Tiến Thắng, thành phố Hà Nội</p>
+                <img src="images/anh_4.jpg" alt="Ảnh tiệc nhà gái" loading="lazy">
+                <h3>Tiệc Nhà Gái</h3>
+                <p>Tại: Xóm Đình, thôn Phú Mỹ, xã Tiến Thắng, thành phố Hà Nội</p>
                 <p>Vào lúc: 16:00</p>
-                <p>Chủ Nhật, Ngày 14/12/2025</p>
+                <p>Chủ Nhật, Ngày 15/12/2025</p> <!-- Sửa ngày từ 14 sang 15 để khớp countdown -->
                 <p>Tức ngày 25 tháng 10 năm Ất Tỵ (Âm Lịch)</p>
                 <div class="icons">
-                    <a href="tel:0358140898">☎️</a>
-                    <a href="https://maps.app.goo.gl/xnF4zg6teBrn1uRv7" target="_blank">📍</a>
+                    <a href="tel:0985097895">☎️</a>
+                    <a href="https://maps.app.goo.gl/gnDYy2fHSxHMXAVk9" target="_blank">📍</a>
                 </div>
             </div>
         </div>
@@ -616,22 +584,39 @@
         </div>
     </section>
 
-    <!-- Album ảnh -->
+    <!-- Album ảnh mới với Swiper Coverflow -->
     <section id="album">
         <div class="container">
-            <h2>Album Ảnh</h2>
-            <div class="album-grid">
-                <img src="images/anh_6.jpg" alt="Ảnh 1" loading="lazy">
-                <img src="images/anh_6.jpg" alt="Ảnh 2" loading="lazy">
-                <img src="images/anh_6.jpg" alt="Ảnh 3" loading="lazy">
-                <img src="images/anh_6.jpg" alt="Ảnh 4" loading="lazy">
-                <img src="images/anh_6.jpg" alt="Ảnh 5" loading="lazy">
-                <img src="images/anh_6.jpg" alt="Ảnh 6" loading="lazy">
-                <img src="images/anh_6.jpg" alt="Ảnh 7" loading="lazy">
-                <img src="images/anh_6.jpg" alt="Ảnh 8" loading="lazy">
-                <img src="images/anh_6.jpg" alt="Ảnh 9" loading="lazy">
-                <img src="images/anh_6.jpg" alt="Ảnh 10" loading="lazy">
+            <h2 class="album-title">Album Ảnh</h2>
+        </div>
+        <div class="album-slide swiper">
+            <div class="swiper-wrapper">
+                <div class="swiper-slide">
+                    <img src="images/album_1.jpg" alt="Ảnh 1" loading="lazy">
+                </div>
+                <div class="swiper-slide">
+                    <img src="images/album_2.jpg" alt="Ảnh 2" loading="lazy">
+                </div>
+                <div class="swiper-slide">
+                    <img src="images/album_3.jpg" alt="Ảnh 3" loading="lazy">
+                </div>
+                <div class="swiper-slide">
+                    <img src="images/album_4.jpg" alt="Ảnh 4" loading="lazy">
+                </div>
+                <div class="swiper-slide">
+                    <img src="images/album_5.jpg" alt="Ảnh 5" loading="lazy">
+                </div>
+                <div class="swiper-slide">
+                    <img src="images/album_6.jpg" alt="Ảnh 6" loading="lazy">
+                </div>
+                <div class="swiper-slide">
+                    <img src="images/album_7.jpg" alt="Ảnh 7" loading="lazy">
+                </div>
+                <div class="swiper-slide">
+                    <img src="images/album_8.jpg" alt="Ảnh 8" loading="lazy">
+                </div>
             </div>
+            <div class="swiper-pagination"></div>
         </div>
     </section>
 
@@ -641,9 +626,6 @@
         <p>Sự hiện diện của bạn là niềm vinh hạnh cho gia đình chúng tôi, và là niềm vui cho đôi chúng tôi</p>
     </section>
 
-    <!-- Nút menu -->
-    <div class="menu-btn">Menu</div>
-
     <!-- Modal QR -->
     <div class="modal" id="qrModal">
         <span class="close" onclick="closeModal()">&times;</span>
@@ -651,49 +633,19 @@
             <h3>QR Code Mừng Cưới</h3>
             <div class="qr-container">
                 <div class="qr-item">
-                    <img src="images/qr-co-dau.jpg" alt="QR Cô Dâu">
+                    <img src="images/qr-co-dau.jpg" alt="QR Cô Dâu" loading="lazy">
                     <p>Cô Dâu</p>
                 </div>
                 <div class="qr-item">
-                    <img src="images/qr-chu-re.jpg" alt="QR Chú Rể">
+                    <img src="images/qr-chu-re.jpg" alt="QR Chú Rể" loading="lazy">
                     <p>Chú Rể</p>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- Trái tim rơi -->
+    <!-- Script chỉ cho đếm ngược và modal, bỏ trái tim rơi -->
     <script>
-        const svgHeart = `
-            <svg width="40" height="40" viewBox="0 0 24 24" fill="#ff69b4" stroke="#d81b60" stroke-width="1.5">
-                <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
-            </svg>
-        `;
-
-        function createHeart() {
-            const heart = document.createElement('div');
-            heart.classList.add('heart-fall');
-            heart.innerHTML = svgHeart;
-
-            const size = Math.random() * 20 + 20;
-            heart.style.width = size + 'px';
-            heart.style.height = size + 'px';
-
-            heart.style.left = Math.random() * 100 + 'vw';
-
-            heart.style.animationDuration = Math.random() * 7 + 8 + 's';
-
-            document.body.appendChild(heart);
-
-            setTimeout(() => heart.remove(), 20000);
-        }
-
-        setInterval(createHeart, 600);
-
-        for (let i = 0; i < 25; i++) {
-            setTimeout(createHeart, i * 250);
-        }
-
         // Đếm ngược
         const targetDate = new Date('2025-12-15T11:15:00').getTime();
 
@@ -706,13 +658,14 @@
             const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
             const seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
-            document.getElementById('days').innerText = days > 0 ? days : '00';
-            document.getElementById('hours').innerText = hours > 0 ? hours : '00';
-            document.getElementById('minutes').innerText = minutes > 0 ? minutes : '00';
-            document.getElementById('seconds').innerText = seconds > 0 ? seconds : '00';
+            document.getElementById('days').innerText = days < 10 ? '0' + days : days; // Thêm 0 nếu < 10
+            document.getElementById('hours').innerText = hours < 10 ? '0' + hours : hours;
+            document.getElementById('minutes').innerText = minutes < 10 ? '0' + minutes : minutes;
+            document.getElementById('seconds').innerText = seconds < 10 ? '0' + seconds : seconds;
 
             if (distance < 0) {
                 clearInterval(interval);
+                // Có thể thêm thông báo "Đã đến ngày cưới!" nếu cần
             }
         }
 
@@ -721,12 +674,78 @@
 
         // Modal functions
         function openModal() {
-            document.getElementById('qrModal').style.display = 'flex';
+            const modal = document.getElementById('qrModal');
+            modal.style.display = 'flex';
+            setTimeout(() => modal.classList.add('show'), 10); // Delay để animation
         }
 
         function closeModal() {
-            document.getElementById('qrModal').style.display = 'none';
+            const modal = document.getElementById('qrModal');
+            modal.classList.remove('show');
+            setTimeout(() => modal.style.display = 'none', 300); // Delay để animation
         }
+
+        // Music toggle
+        const audio = document.getElementById('bgMusic');
+        const toggle = document.getElementById('music-toggle');
+        const icon = toggle.querySelector('i');
+
+        // Force play khi trang load (handle autoplay blocked)
+        document.addEventListener('DOMContentLoaded', () => {
+            const playPromise = audio.play();
+            if (playPromise !== undefined) {
+                playPromise.then(() => {
+                    // Autoplay thành công
+                    console.log('Nhạc đang phát tự động');
+                }).catch(error => {
+                    // Autoplay blocked, chờ user interact
+                    console.log('Autoplay bị chặn, chờ click');
+                    document.body.addEventListener('click', () => {
+                        audio.play();
+                    }, { once: true }); // Play khi user click bất kỳ đâu lần đầu
+                });
+            }
+        });
+
+        toggle.addEventListener('click', () => {
+            if (audio.paused) {
+                audio.play();
+                icon.classList.replace('fa-volume-xmark', 'fa-volume-up');
+                toggle.classList.remove('muted');
+            } else {
+                audio.pause(); // Pause thay vì mute để dừng hoàn toàn
+                icon.classList.replace('fa-volume-up', 'fa-volume-xmark');
+                toggle.classList.add('muted');
+            }
+        });
+    </script>
+
+    <!-- Swiper JS -->
+    <script src="https://cdn.jsdelivr.net/npm/swiper@12/swiper-bundle.min.js"></script>
+    <script>
+        const swiper = new Swiper('.album-slide', {
+            effect: 'coverflow',
+            grabCursor: true,
+            centeredSlides: true,
+            slidesPerView: 'auto',
+            loop: true, // Lặp lại khi hết vòng
+            autoplay: {
+                delay: 2500, // Thời gian chờ giữa các slide (2.5 giây)
+                disableOnInteraction: false, // Không dừng khi tương tác
+                reverseDirection: false // Chuyển động từ phải qua trái (default)
+            },
+            coverflowEffect: {
+                rotate: 45,
+                stretch: 0,
+                depth: 100,
+                modifier: 1,
+                slideShadows: true,
+            },
+            pagination: {
+                el: '.swiper-pagination',
+                clickable: true,
+            },
+        });
     </script>
 </body>
 
