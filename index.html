@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mạnh Tiến & Trần Hoa</title>
+    <link rel="icon" href="images/logo.png" type="image/png">
     <!-- Preload key images for faster load -->
     <link rel="preload" href="images/LKI_2032.jpg" as="image">
     <link rel="preload" href="images/background.jpg" as="image">
@@ -531,7 +532,7 @@
     <!-- Sự kiện -->
     <section id="events">
         <div class="container">
-            <h2 class="fade-in-up">Sự Kiện Cưới</h2> <!-- THÊM class -->
+            <h2 class="fade-in-up">Thư Mời Tiệc Cưới</h2> <!-- THÊM class -->
             <div class="event">
                 <img src="images/anh_5.jpg" alt="Ảnh tiệc nhà trai" loading="lazy" width="800" height="600">
                 <!-- Add dimensions -->
@@ -549,7 +550,7 @@
                 <img src="images/anh_4.jpg" alt="Ảnh tiệc nhà gái" loading="lazy" width="800" height="600">
                 <!-- Add dimensions -->
                 <h3 class="fade-in-up">Tiệc Nhà Gái</h3> <!-- THÊM class -->
-                <p class="fade-in-up">Tại: Xóm Đình, thôn Phú Mỹ, xã Tiến Thắng, thành phố Hà Nội</p>
+                <p class="fade-in-up">Tại: Xóm 5, thôn Phú Mỹ, xã Tiến Thắng, thành phố Hà Nội</p>
                 <!-- THÊM class -->
                 <p class="fade-in-up">Vào lúc: 16:00</p>
                 <p class="fade-in-up">Chủ Nhật, Ngày 14/12/2025</p>
@@ -669,6 +670,7 @@
                     <img src="images/qr-chu-re.jpg" alt="QR Chú Rể" loading="lazy" width="150" height="150">
                     <p>Chú Rể</p>
                 </div>
+                <br></br>
                 <div class="qr-item">
                     <img src="images/qr-co-dau.jpg" alt="QR Cô Dâu" loading="lazy" width="150" height="150">
                     <p>Cô Dâu</p>
@@ -680,7 +682,7 @@
     <!-- JS for countdown, modal, music -->
     <script>
         // Countdown
-        const targetDate = new Date('2025-12-14T00:00:00').getTime();
+        const targetDate = new Date('2025-12-14T16:00:00').getTime();
         function updateCountdown() {
             const now = new Date().getTime();
             const distance = targetDate - now;
@@ -750,11 +752,11 @@
             swiperConfig.effect = 'coverflow';
             swiperConfig.autoplay = { delay: 3000, disableOnInteraction: false, reverseDirection: false };
             swiperConfig.coverflowEffect = {
-                rotate: isMobile ? 30 : 45,
+                rotate: isMobile ? 45 : 45,
                 stretch: 0,
-                depth: isMobile ? 50 : 100,
+                depth: isMobile ? 80 : 100,
                 modifier: 1,
-                slideShadows: !isMobile
+                slideShadows: true
             };
             swiperConfig.speed = 800;
             const swiper = new Swiper('.album-slide', swiperConfig);
