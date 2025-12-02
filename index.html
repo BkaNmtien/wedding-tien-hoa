@@ -488,13 +488,16 @@
         /* THÊM: Hiệu ứng fade-in-up cho chữ */
         .fade-in-up {
             opacity: 0;
-            transform: translateY(50px); /* Bắt đầu từ dưới lên */
-            transition: opacity 0.8s ease-out, transform 0.8s ease-out; /* Mượt mà 0.6s */
+            transform: translateY(50px);
+            /* Bắt đầu từ dưới lên */
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+            /* Mượt mà 0.6s */
         }
 
         .fade-in-up.visible {
             opacity: 1;
-            transform: translateY(0); /* Vị trí cuối */
+            transform: translateY(0);
+            /* Vị trí cuối */
         }
     </style>
     <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
@@ -546,7 +549,8 @@
                 <img src="images/anh_4.jpg" alt="Ảnh tiệc nhà gái" loading="lazy" width="800" height="600">
                 <!-- Add dimensions -->
                 <h3 class="fade-in-up">Tiệc Nhà Gái</h3> <!-- THÊM class -->
-                <p class="fade-in-up">Tại: Xóm Đình, thôn Phú Mỹ, xã Tiến Thắng, thành phố Hà Nội</p> <!-- THÊM class -->
+                <p class="fade-in-up">Tại: Xóm Đình, thôn Phú Mỹ, xã Tiến Thắng, thành phố Hà Nội</p>
+                <!-- THÊM class -->
                 <p class="fade-in-up">Vào lúc: 16:00</p>
                 <p class="fade-in-up">Chủ Nhật, Ngày 14/12/2025</p>
                 <p class="fade-in-up">Tức ngày 25 tháng 10 năm Ất Tỵ (Âm Lịch)</p>
@@ -562,7 +566,7 @@
     <section id="countdown">
         <div class="date-title fade-in-up">14 Tháng 12 2025</div> <!-- THÊM class -->
         <div class="save-date fade-in-up">Save the Date</div> <!-- THÊM class -->
-        <p class="wish fade-in-up">Sự hiện diện của bạn chắc chắn sẽ làm cho đám cưới của chúng tôi có thêm một niềm hạnh phúc!</p> <!-- THÊM class -->
+        <p class="wish fade-in-up">Sự hiện diện của bạn sẽ khiến hôn lễ của chúng tôi trở nên ý nghĩa hơn bao giờ hết!</p> <!-- THÊM class -->
         <div class="countdown-timer">
             <div class="countdown-item">
                 <span id="days">00</span>
@@ -585,7 +589,8 @@
 
     <!-- Hộp quà -->
     <section id="gift-section" style="margin: 40px 10px; text-align: center;">
-        <h3 class="fade-in-up" style="color: #d81b60; margin-bottom: 20px; font-family: 'Dancing Script', cursive; font-size: 2.5rem;">
+        <h3 class="fade-in-up"
+            style="color: #d81b60; margin-bottom: 20px; font-family: 'Dancing Script', cursive; font-size: 2.5rem;">
             Hộp Quà Mừng Cưới
         </h3> <!-- THÊM class -->
         <div class="gift-btn" onclick="openModal()" style="display: inline-block; font-size: 3rem; cursor: pointer;">
@@ -667,7 +672,7 @@
                 <div class="qr-item">
                     <img src="images/qr-co-dau.jpg" alt="QR Cô Dâu" loading="lazy" width="150" height="150">
                     <p>Cô Dâu</p>
-                </div> 
+                </div>
             </div>
         </div>
     </div>
@@ -742,28 +747,16 @@
                 },
             };
 
-            if (isMobile) {
-                // THÊM: Config cho mobile - effect slide, chuyển từ phải qua trái
-                swiperConfig.effect = 'slide';
-                swiperConfig.autoplay = {
-                    delay: 3000, // Tốc độ autoplay (3 giây/slide)
-                    disableOnInteraction: false,
-                    reverseDirection: true, // Đảo chiều: từ phải sang trái
-                };
-                swiperConfig.speed = 800; // Tốc độ chuyển mượt mà
-            } else {
-                // Giữ coverflow cho desktop
-                swiperConfig.effect = 'coverflow';
-                swiperConfig.autoplay = { delay: 2500, disableOnInteraction: false };
-                swiperConfig.coverflowEffect = {
-                    rotate: 45,
-                    stretch: 0,
-                    depth: 100,
-                    modifier: 1,
-                    slideShadows: true
-                };
-            }
-
+            swiperConfig.effect = 'coverflow';
+            swiperConfig.autoplay = { delay: 3000, disableOnInteraction: false, reverseDirection: false };
+            swiperConfig.coverflowEffect = {
+                rotate: isMobile ? 30 : 45,
+                stretch: 0,
+                depth: isMobile ? 50 : 100,
+                modifier: 1,
+                slideShadows: !isMobile
+            };
+            swiperConfig.speed = 800;
             const swiper = new Swiper('.album-slide', swiperConfig);
 
             // THÊM: Init Fancybox cho gallery lightbox (hỗ trợ swipe, arrows trên mobile)
