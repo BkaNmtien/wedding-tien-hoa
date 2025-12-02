@@ -11,6 +11,8 @@
     <link rel="preload" href="images/LKI_1801.jpg" as="image">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@12/swiper-bundle.min.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+    <!-- THÊM: Fancybox CSS cho lightbox gallery -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.css" />
     <style>
         * {
             margin: 0;
@@ -233,6 +235,12 @@
             height: 400px;
         }
 
+        .swiper-slide a {
+            display: block;
+            width: 100%;
+            height: 100%;
+        }
+
         .swiper-slide img {
             display: block;
             width: 100%;
@@ -253,7 +261,6 @@
             background: #d81b60;
         }
 
-        /* Responsive cho mobile */
         /* Responsive cho mobile */
         @media (max-width: 768px) {
             section {
@@ -477,6 +484,18 @@
         .music-icon.muted {
             color: #ffa500;
         }
+
+        /* THÊM: Hiệu ứng fade-in-up cho chữ */
+        .fade-in-up {
+            opacity: 0;
+            transform: translateY(50px); /* Bắt đầu từ dưới lên */
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out; /* Mượt mà 0.6s */
+        }
+
+        .fade-in-up.visible {
+            opacity: 1;
+            transform: translateY(0); /* Vị trí cuối */
+        }
     </style>
     <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
 </head>
@@ -490,8 +509,8 @@
     </audio>
 
     <!-- Music toggle icon -->
-    <div id="music-toggle" class="music-icon">
-        <i class="fas fa-volume-up"></i>
+    <div id="music-toggle" class="music-icon muted">
+        <i class="fas fa-volume-xmark"></i>
     </div>
 
     <!-- Hero section -->
@@ -499,9 +518,9 @@
         <img class="hero-image" src="images/LKI_2032.jpg" alt="Ảnh cưới chính" loading="lazy" width="1920"
             height="1080"> <!-- Add dimensions -->
         <div class="hero-content">
-            <h1 class="title">Mạnh Tiến & Trần Hoa</h1>
+            <h1 class="title fade-in-up">Mạnh Tiến & Trần Hoa</h1> <!-- THÊM class fade-in-up -->
             <div class="banner">
-                <span>❤️ We’re Getting Married ❤️</span>
+                <span class="fade-in-up">❤️ We’re Getting Married ❤️</span> <!-- THÊM class -->
             </div>
         </div>
     </section>
@@ -509,15 +528,15 @@
     <!-- Sự kiện -->
     <section id="events">
         <div class="container">
-            <h2>Sự Kiện Cưới</h2>
+            <h2 class="fade-in-up">Sự Kiện Cưới</h2> <!-- THÊM class -->
             <div class="event">
                 <img src="images/anh_5.jpg" alt="Ảnh tiệc nhà trai" loading="lazy" width="800" height="600">
                 <!-- Add dimensions -->
-                <h3>Tiệc Nhà Trai</h3>
-                <p>Tại: Khu 4, thôn Kim Giao, xã Tiến Thắng, thành phố Hà Nội</p>
-                <p>Vào lúc: 16:00</p>
-                <p>Chủ Nhật, Ngày 15/12/2025</p>
-                <p>Tức ngày 25 tháng 10 năm Ất Tỵ (Âm Lịch)</p>
+                <h3 class="fade-in-up">Tiệc Nhà Trai</h3> <!-- THÊM class -->
+                <p class="fade-in-up">Tại: Khu 4, thôn Kim Giao, xã Tiến Thắng, thành phố Hà Nội</p> <!-- THÊM class -->
+                <p class="fade-in-up">Vào lúc: 16:00</p>
+                <p class="fade-in-up">Chủ Nhật, Ngày 14/12/2025</p>
+                <p class="fade-in-up">Tức ngày 25 tháng 10 năm Ất Tỵ (Âm Lịch)</p>
                 <div class="icons">
                     <a href="tel:0358140898">☎️</a>
                     <a href="https://maps.app.goo.gl/xnF4zg6teBrn1uRv7" target="_blank">📍</a>
@@ -526,11 +545,11 @@
             <div class="event">
                 <img src="images/anh_4.jpg" alt="Ảnh tiệc nhà gái" loading="lazy" width="800" height="600">
                 <!-- Add dimensions -->
-                <h3>Tiệc Nhà Gái</h3>
-                <p>Tại: Xóm Đình, thôn Phú Mỹ, xã Tiến Thắng, thành phố Hà Nội</p>
-                <p>Vào lúc: 16:00</p>
-                <p>Chủ Nhật, Ngày 15/12/2025</p>
-                <p>Tức ngày 25 tháng 10 năm Ất Tỵ (Âm Lịch)</p>
+                <h3 class="fade-in-up">Tiệc Nhà Gái</h3> <!-- THÊM class -->
+                <p class="fade-in-up">Tại: Xóm Đình, thôn Phú Mỹ, xã Tiến Thắng, thành phố Hà Nội</p> <!-- THÊM class -->
+                <p class="fade-in-up">Vào lúc: 16:00</p>
+                <p class="fade-in-up">Chủ Nhật, Ngày 14/12/2025</p>
+                <p class="fade-in-up">Tức ngày 25 tháng 10 năm Ất Tỵ (Âm Lịch)</p>
                 <div class="icons">
                     <a href="tel:0985097895">☎️</a>
                     <a href="https://maps.app.goo.gl/gnDYy2fHSxHMXAVk9" target="_blank">📍</a>
@@ -541,9 +560,9 @@
 
     <!-- Đếm ngược -->
     <section id="countdown">
-        <div class="date-title">15 Tháng 12 2025</div>
-        <div class="save-date">Save the Date</div>
-        <p class="wish">Sự hiện diện của bạn chắc chắn sẽ làm cho đám cưới của chúng tôi có thêm một niềm hạnh phúc!</p>
+        <div class="date-title fade-in-up">14 Tháng 12 2025</div> <!-- THÊM class -->
+        <div class="save-date fade-in-up">Save the Date</div> <!-- THÊM class -->
+        <p class="wish fade-in-up">Sự hiện diện của bạn chắc chắn sẽ làm cho đám cưới của chúng tôi có thêm một niềm hạnh phúc!</p> <!-- THÊM class -->
         <div class="countdown-timer">
             <div class="countdown-item">
                 <span id="days">00</span>
@@ -566,9 +585,9 @@
 
     <!-- Hộp quà -->
     <section id="gift-section" style="margin: 40px 10px; text-align: center;">
-        <h3 style="color: #d81b60; margin-bottom: 20px; font-family: 'Dancing Script', cursive; font-size: 2.5rem;">
+        <h3 class="fade-in-up" style="color: #d81b60; margin-bottom: 20px; font-family: 'Dancing Script', cursive; font-size: 2.5rem;">
             Hộp Quà Mừng Cưới
-        </h3>
+        </h3> <!-- THÊM class -->
         <div class="gift-btn" onclick="openModal()" style="display: inline-block; font-size: 3rem; cursor: pointer;">
             🎁
         </div>
@@ -577,33 +596,49 @@
     <!-- Album -->
     <section id="album">
         <div class="container">
-            <h2 class="album-title">Album Ảnh</h2>
+            <h2 class="album-title fade-in-up">Album Ảnh</h2> <!-- THÊM class -->
         </div>
         <div class="album-slide swiper">
             <div class="swiper-wrapper">
                 <div class="swiper-slide">
-                    <img src="images/album_1.jpg" alt="Ảnh 1" loading="lazy" width="400" height="400">
+                    <a data-fancybox="gallery" href="images/album_1.jpg">
+                        <img src="images/album_1.jpg" alt="Ảnh 1" loading="lazy" width="400" height="400">
+                    </a>
                 </div>
                 <div class="swiper-slide">
-                    <img src="images/album_2.jpg" alt="Ảnh 2" loading="lazy" width="400" height="400">
+                    <a data-fancybox="gallery" href="images/album_2.jpg">
+                        <img src="images/album_2.jpg" alt="Ảnh 2" loading="lazy" width="400" height="400">
+                    </a>
                 </div>
                 <div class="swiper-slide">
-                    <img src="images/album_3.jpg" alt="Ảnh 3" loading="lazy" width="400" height="400">
+                    <a data-fancybox="gallery" href="images/album_3.jpg">
+                        <img src="images/album_3.jpg" alt="Ảnh 3" loading="lazy" width="400" height="400">
+                    </a>
                 </div>
                 <div class="swiper-slide">
-                    <img src="images/album_4.jpg" alt="Ảnh 4" loading="lazy" width="400" height="400">
+                    <a data-fancybox="gallery" href="images/album_4.jpg">
+                        <img src="images/album_4.jpg" alt="Ảnh 4" loading="lazy" width="400" height="400">
+                    </a>
                 </div>
                 <div class="swiper-slide">
-                    <img src="images/album_5.jpg" alt="Ảnh 5" loading="lazy" width="400" height="400">
+                    <a data-fancybox="gallery" href="images/album_5.jpg">
+                        <img src="images/album_5.jpg" alt="Ảnh 5" loading="lazy" width="400" height="400">
+                    </a>
                 </div>
                 <div class="swiper-slide">
-                    <img src="images/album_6.jpg" alt="Ảnh 6" loading="lazy" width="400" height="400">
+                    <a data-fancybox="gallery" href="images/album_6.jpg">
+                        <img src="images/album_6.jpg" alt="Ảnh 6" loading="lazy" width="400" height="400">
+                    </a>
                 </div>
                 <div class="swiper-slide">
-                    <img src="images/album_7.jpg" alt="Ảnh 7" loading="lazy" width="400" height="400">
+                    <a data-fancybox="gallery" href="images/album_7.jpg">
+                        <img src="images/album_7.jpg" alt="Ảnh 7" loading="lazy" width="400" height="400">
+                    </a>
                 </div>
                 <div class="swiper-slide">
-                    <img src="images/album_8.jpg" alt="Ảnh 8" loading="lazy" width="400" height="400">
+                    <a data-fancybox="gallery" href="images/album_8.jpg">
+                        <img src="images/album_8.jpg" alt="Ảnh 8" loading="lazy" width="400" height="400">
+                    </a>
                 </div>
             </div>
             <div class="swiper-pagination"></div>
@@ -612,11 +647,11 @@
 
     <!-- Thank you -->
     <section id="thank-you">
-        <h2>Thank you!</h2>
-        <p class="thank-text">Cảm ơn bạn đã dành tình cảm cho chúng mình!</p>
-        <p class="thank-text">Sự hiện diện của bạn chính là món quà ý nghĩa nhất</p>
-        <p class="thank-text">và chúng mình vô cùng chân quý khi được cùng bạn</p>
-        <p class="thank-text">chia sẻ niềm hạnh phúc trong ngày trọng đại này.</p>
+        <h2 class="fade-in-up">Thank you!</h2> <!-- THÊM class -->
+        <p class="thank-text fade-in-up">Cảm ơn bạn đã dành tình cảm cho chúng mình!</p> <!-- THÊM class -->
+        <p class="thank-text fade-in-up">Sự hiện diện của bạn chính là món quà ý nghĩa nhất</p>
+        <p class="thank-text fade-in-up">và chúng mình vô cùng chân quý khi được cùng bạn</p>
+        <p class="thank-text fade-in-up">chia sẻ niềm hạnh phúc trong ngày trọng đại này.</p>
     </section>
 
     <!-- Modal QR -->
@@ -626,13 +661,13 @@
             <h3>QR Code Mừng Cưới</h3>
             <div class="qr-container">
                 <div class="qr-item">
-                    <img src="images/qr-co-dau.jpg" alt="QR Cô Dâu" loading="lazy" width="150" height="150">
-                    <p>Cô Dâu</p>
-                </div>
-                <div class="qr-item">
                     <img src="images/qr-chu-re.jpg" alt="QR Chú Rể" loading="lazy" width="150" height="150">
                     <p>Chú Rể</p>
                 </div>
+                <div class="qr-item">
+                    <img src="images/qr-co-dau.jpg" alt="QR Cô Dâu" loading="lazy" width="150" height="150">
+                    <p>Cô Dâu</p>
+                </div> 
             </div>
         </div>
     </div>
@@ -640,7 +675,7 @@
     <!-- JS for countdown, modal, music -->
     <script>
         // Countdown
-        const targetDate = new Date('2025-12-15T11:15:00').getTime();
+        const targetDate = new Date('2025-12-14T00:00:00').getTime();
         function updateCountdown() {
             const now = new Date().getTime();
             const distance = targetDate - now;
@@ -673,16 +708,14 @@
         const audio = document.getElementById('bgMusic');
         const toggle = document.getElementById('music-toggle');
         const icon = toggle.querySelector('i');
-        document.addEventListener('DOMContentLoaded', () => {
-            audio.play().catch(() => {
-                document.body.addEventListener('click', () => audio.play(), { once: true });
-            });
-        });
+
+        // Toggle khi click icon
         toggle.addEventListener('click', () => {
             if (audio.paused) {
-                audio.play();
-                icon.classList.replace('fa-volume-xmark', 'fa-volume-up');
-                toggle.classList.remove('muted');
+                audio.play().then(() => {
+                    icon.classList.replace('fa-volume-xmark', 'fa-volume-up');
+                    toggle.classList.remove('muted');
+                });
             } else {
                 audio.pause();
                 icon.classList.replace('fa-volume-up', 'fa-volume-xmark');
@@ -693,29 +726,70 @@
 
     <!-- Swiper JS with defer -->
     <script src="https://cdn.jsdelivr.net/npm/swiper@12/swiper-bundle.min.js" defer></script>
+    <!-- THÊM: Fancybox JS cho lightbox gallery -->
+    <script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.umd.js" defer></script>
     <script defer>
         document.addEventListener('DOMContentLoaded', () => {
             const isMobile = window.innerWidth <= 768;
-            const swiper = new Swiper('.album-slide', {
-                effect: 'coverflow',
+            const swiperConfig = {
                 grabCursor: true,
                 centeredSlides: true,
                 slidesPerView: 'auto',
                 loop: true,
-                autoplay: isMobile ? false : { delay: 2500, disableOnInteraction: false }, // Tắt autoplay trên mobile
-                coverflowEffect: {
-                    rotate: isMobile ? 30 : 45, // Giảm rotate trên mobile
-                    stretch: 0,
-                    depth: isMobile ? 50 : 100, // Giảm depth trên mobile
-                    modifier: 1,
-                    slideShadows: !isMobile // Tắt shadow trên mobile nếu lag
-                },
                 pagination: {
                     el: '.swiper-pagination',
                     clickable: true,
                 },
+            };
+
+            if (isMobile) {
+                // THÊM: Config cho mobile - effect slide, chuyển từ phải qua trái
+                swiperConfig.effect = 'slide';
+                swiperConfig.autoplay = {
+                    delay: 3000, // Tốc độ autoplay (3 giây/slide)
+                    disableOnInteraction: false,
+                    reverseDirection: true, // Đảo chiều: từ phải sang trái
+                };
+                swiperConfig.speed = 800; // Tốc độ chuyển mượt mà
+            } else {
+                // Giữ coverflow cho desktop
+                swiperConfig.effect = 'coverflow';
+                swiperConfig.autoplay = { delay: 2500, disableOnInteraction: false };
+                swiperConfig.coverflowEffect = {
+                    rotate: 45,
+                    stretch: 0,
+                    depth: 100,
+                    modifier: 1,
+                    slideShadows: true
+                };
+            }
+
+            const swiper = new Swiper('.album-slide', swiperConfig);
+
+            // THÊM: Init Fancybox cho gallery lightbox (hỗ trợ swipe, arrows trên mobile)
+            Fancybox.bind('[data-fancybox="gallery"]', {
+                // Tùy chọn: Có thể thêm config như infinite loop, touch swipe
+                infinite: true,
+                Thumbs: false, // Tắt thumbs nếu không cần
             });
         });
+
+        // THÊM: Intersection Observer cho hiệu ứng fade-in-up khi scroll
+        document.addEventListener('DOMContentLoaded', () => {
+            const fadeElements = document.querySelectorAll('.fade-in-up');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                        observer.unobserve(entry.target); // Chỉ kích hoạt 1 lần
+                    }
+                });
+            }, { threshold: 0.2 }); // Kích hoạt khi 20% element visible
+
+            fadeElements.forEach(el => observer.observe(el));
+        });
+
+        // Giữ nguyên phần shrink text trên mobile cho #thank-you
         document.addEventListener('DOMContentLoaded', () => {
             if (window.innerWidth <= 768) { // Chỉ chạy trên mobile
                 const paragraphs = document.querySelectorAll('#thank-you .thank-text');
